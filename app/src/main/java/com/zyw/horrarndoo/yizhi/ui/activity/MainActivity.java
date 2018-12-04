@@ -114,6 +114,7 @@ public class MainActivity extends BaseCompatActivity implements HomeFragment
             mFragments[FIFTH] = findFragment(PersonalRootFragment.class);
         }
 
+        //背景(移动的图片) 与 头像
         NavigationUtils.disableNavigationViewScrollbars(nvMenu);
         mivMenu = (MovingImageView) nvMenu.getHeaderView(0).findViewById(R.id.miv_menu);
         civHead = (CircleImageView) nvMenu.getHeaderView(0).findViewById(R.id.civ_head);
@@ -128,7 +129,7 @@ public class MainActivity extends BaseCompatActivity implements HomeFragment
             }
         }
 
-        civHead.setOnClickListener(new View.OnClickListener() {
+        civHead.setOnClickListener(new View.OnClickListener() {//点击侧滑的头像,跳转到页面(这里是personal_fragment)
             @Override
             public void onClick(View v) {
                 dlRoot.closeDrawer(GravityCompat.START);
@@ -136,6 +137,7 @@ public class MainActivity extends BaseCompatActivity implements HomeFragment
             }
         });
 
+        //主页/干货/影视/书籍/个人
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView
                 .OnNavigationItemSelectedListener() {
@@ -162,6 +164,7 @@ public class MainActivity extends BaseCompatActivity implements HomeFragment
             }
         });
 
+        //根据模式来展示侧滑界面
         nvMenu.getMenu().findItem(R.id.item_model).setTitle(SpUtils.getNightModel(mContext) ?
                 "夜间模式" : "日间模式");
         nvMenu.setNavigationItemSelectedListener(new NavigationView
@@ -169,14 +172,14 @@ public class MainActivity extends BaseCompatActivity implements HomeFragment
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.group_item_github:
+                    case R.id.group_item_github://项目主页
                         Bundle bundle = new Bundle();
                         bundle.putString(BundleKeyConstant.ARG_KEY_WEB_VIEW_LOAD_TITLE, "Yizhi");
                         bundle.putString(BundleKeyConstant.ARG_KEY_WEB_VIEW_LOAD_URL,
                                 "https://github.com/Horrarndoo/YiZhi");
                         startActivity(WebViewLoadActivity.class, bundle);
                         break;
-                    case R.id.group_item_more:
+                    case R.id.group_item_more://更多内容
                         Bundle bundle2 = new Bundle();
                         bundle2.putString(BundleKeyConstant.ARG_KEY_WEB_VIEW_LOAD_TITLE,
                                 "Horrarndoo");
@@ -184,17 +187,17 @@ public class MainActivity extends BaseCompatActivity implements HomeFragment
                                 "http://blog.csdn.net/oqinyou");
                         startActivity(WebViewLoadActivity.class, bundle2);
                         break;
-                    case R.id.group_item_qr_code:
+                    case R.id.group_item_qr_code://二维码
                         startActivity(QRCodeActivity.class);
                         break;
-                    case R.id.group_item_share_project:
+                    case R.id.group_item_share_project://分享项目
                         showShare();
                         break;
-                    case R.id.item_model:
+                    case R.id.item_model://日间模式
                         SpUtils.setNightModel(mContext, !SpUtils.getNightModel(mContext));
                         MainActivity.this.reload();
                         break;
-                    case R.id.item_about:
+                    case R.id.item_about://关于
                         startActivity(AboutActivity.class);
                         break;
                 }

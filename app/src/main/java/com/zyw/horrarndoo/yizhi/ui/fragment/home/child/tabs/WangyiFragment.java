@@ -23,6 +23,7 @@ import butterknife.BindView;
 /**
  * Created by Horrarndoo on 2017/9/11.
  * <p>
+ *     首页   热点新闻
  */
 
 public class WangyiFragment extends BaseRecycleFragment<WangyiContract.WangyiPresenter>

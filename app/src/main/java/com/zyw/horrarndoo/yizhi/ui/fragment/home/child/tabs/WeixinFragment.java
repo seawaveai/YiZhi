@@ -23,6 +23,7 @@ import butterknife.BindView;
 /**
  * Created by Horrarndoo on 2017/9/11.
  * <p>
+ *     首页   微信精选
  */
 
 public class WeixinFragment extends BaseRecycleFragment<WeixinContract.WeixinPresenter>
