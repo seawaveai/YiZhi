@@ -7,8 +7,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
-import android.widget.Button;
+
 
 import com.zyw.horrarndoo.sdk.R;
 
@@ -18,7 +19,7 @@ import com.zyw.horrarndoo.sdk.R;
  * <p>
  * 带有进度变化的button
  */
-public class ProgressButton extends Button {
+public class ProgressButton extends AppCompatButton {
     public static final int MAX_PROGRESS = 1000;
     private boolean isAdding = false;
     private int progress = 0;

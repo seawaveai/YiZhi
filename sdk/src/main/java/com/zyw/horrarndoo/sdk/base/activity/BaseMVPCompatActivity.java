@@ -13,8 +13,8 @@ import com.zyw.horrarndoo.sdk.utils.ToastUtils;
  * <p>
  * Mvp Activity基类
  */
-public abstract class BaseMVPCompatActivity<P extends BasePresenter> extends
-        BaseCompatActivity implements IBaseActivity {
+public abstract class BaseMVPCompatActivity<P extends BasePresenter>
+        extends BaseCompatActivity implements IBaseActivity {
     /**
      * presenter 具体的presenter由子类确定
      */
@@ -29,7 +29,7 @@ public abstract class BaseMVPCompatActivity<P extends BasePresenter> extends
         super.initData();
         mPresenter = (P) initPresenter();
         if (mPresenter != null) {
-                mPresenter.attachMV(this);
+            mPresenter.attachMV(this);
             Logger.d("attach M V success.");
         }
     }
@@ -82,4 +82,5 @@ public abstract class BaseMVPCompatActivity<P extends BasePresenter> extends
     public void back() {
         super.onBackPressedSupport();
     }
+
 }

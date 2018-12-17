@@ -29,7 +29,6 @@ public abstract class BaseMVPCompatFragment<P extends BasePresenter> extends
      */
     public void initData() {
         super.initData();
-
         mPresenter = (P) initPresenter();
         if (mPresenter != null) {
                 mPresenter.attachMV(this);
@@ -75,8 +74,7 @@ public abstract class BaseMVPCompatFragment<P extends BasePresenter> extends
     }
 
     @Override
-    public void startNewFragmentForResult(@NonNull SupportFragment supportFragment, int
-            requestCode) {
+    public void startNewFragmentForResult(@NonNull SupportFragment supportFragment, int requestCode) {
         startForResult(supportFragment, requestCode);
     }
 
@@ -119,4 +117,5 @@ public abstract class BaseMVPCompatFragment<P extends BasePresenter> extends
     public Activity getBindActivity() {
         return mActivity;
     }
+
 }

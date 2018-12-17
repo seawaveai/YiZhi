@@ -94,8 +94,7 @@ public class AppUtils {
 
     @SuppressLint("MissingPermission")
     public static String getIMEI(Context context) {
-        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context
-                .TELEPHONY_SERVICE);
+        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         return tm.getDeviceId();
     }
 
@@ -114,8 +113,7 @@ public class AppUtils {
     public static void hideSoftInput(EditText et) {
         InputMethodManager inputMethodManager = (InputMethodManager) et.getContext()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(et.getWindowToken(), InputMethodManager
-                .HIDE_NOT_ALWAYS);
+        inputMethodManager.hideSoftInputFromWindow(et.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     /**
@@ -127,23 +125,18 @@ public class AppUtils {
      *            焦点位置
      * @return 是否隐藏
      */
-    public static void hideKeyboard(MotionEvent event, View view,
-                                    Activity activity) {
+    public static void hideKeyboard(MotionEvent event, View view, Activity activity) {
         try {
             if (view != null && view instanceof EditText) {
                 int[] location = { 0, 0 };
                 view.getLocationInWindow(location);
-                int left = location[0], top = location[1], right = left
-                        + view.getWidth(), bootom = top + view.getHeight();
+                int left = location[0], top = location[1], right = left + view.getWidth(), bootom = top + view.getHeight();
                 // 判断焦点位置坐标是否在空间内，如果位置在控件外，则隐藏键盘
-                if (event.getRawX() < left || event.getRawX() > right
-                        || event.getY() < top || event.getRawY() > bootom) {
+                if (event.getRawX() < left || event.getRawX() > right || event.getY() < top || event.getRawY() > bootom) {
                     // 隐藏键盘
                     IBinder token = view.getWindowToken();
-                    InputMethodManager inputMethodManager = (InputMethodManager) activity
-                            .getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputMethodManager.hideSoftInputFromWindow(token,
-                            InputMethodManager.HIDE_NOT_ALWAYS);
+                    InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
                 }
             }
         } catch (Exception e) {
@@ -159,8 +152,7 @@ public class AppUtils {
      */
     public static File getSDPath() {
         File sdDir = null;
-        boolean sdCardExist = Environment.getExternalStorageState().equals(Environment
-                .MEDIA_MOUNTED);   //判断sd卡是否存在
+        boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);   //判断sd卡是否存在
         if (sdCardExist) {
             sdDir = Environment.getExternalStorageDirectory();//获取跟目录
         }
@@ -173,16 +165,15 @@ public class AppUtils {
      * @param data
      */
     public static void promptInstall(Context context, Uri data) {
-        Intent promptInstall = new Intent(Intent.ACTION_VIEW)
-                .setDataAndType(data, "application/vnd.android.package-archive");
+        Intent promptInstall = new Intent(Intent.ACTION_VIEW).
+                setDataAndType(data, "application/vnd.android.package-archive");
         // FLAG_ACTIVITY_NEW_TASK 可以保证安装成功时可以正常打开 app
         promptInstall.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(promptInstall);
     }
 
     public static void copy2clipboard(Context context, String text) {
-        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context
-                .CLIPBOARD_SERVICE);
+        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("clip", text);
         cm.setPrimaryClip(clip);
     }

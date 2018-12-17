@@ -28,17 +28,18 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * Created by Horrarndoo on 2017/9/7.
  * <p>
  * BaseActivity
+ * <p>
+ * SupportActivity是开源库里面的api.
  */
 
 public abstract class BaseCompatActivity extends SupportActivity {
-    protected GlobalApplication mApplication;
+    protected GlobalApplication  mApplication;
     protected WaitPorgressDialog mWaitPorgressDialog;
-    protected Context mContext;//全局上下文对象
-    protected boolean isTransAnim;
+    protected Context            mContext;//全局上下文对象
+    protected boolean            isTransAnim;
 
     static {
-        //5.0以下兼容vector
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);//5.0以下兼容vector(矢量)
     }
 
     @Override
@@ -66,7 +67,6 @@ public abstract class BaseCompatActivity extends SupportActivity {
                 View view = getCurrentFocus();
                 AppUtils.hideKeyboard(ev, view, this);//调用方法判断是否需要隐藏键盘
                 break;
-
             default:
                 break;
         }
@@ -74,17 +74,19 @@ public abstract class BaseCompatActivity extends SupportActivity {
     }
 
     private void init(Bundle savedInstanceState) {
-        setTheme(ThemeUtils.themeArr[SpUtils.getThemeIndex(this)][
-                SpUtils.getNightModel(this) ? 1 : 0]);
+        setTheme(ThemeUtils.themeArr[SpUtils.getThemeIndex(this)][SpUtils.getNightModel(this) ? 1 : 0]);//设置Theme
         setContentView(getLayoutId());
         ButterKnife.bind(this);
-        StatusBarUtils.setTransparent(this);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        StatusBarUtils.setTransparent(this);//状态栏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//屏幕的横竖
         initData();
         initView(savedInstanceState);
-        AppManager.getAppManager().addActivity(this);
+        AppManager.getAppManager().addActivity(this);//添加Activity到堆栈
     }
 
+    /**
+     * 日间模式,切换的方法
+     */
     public void reload() {
         Intent intent = getIntent();
         overridePendingTransition(0, 0);
@@ -93,6 +95,15 @@ public abstract class BaseCompatActivity extends SupportActivity {
         overridePendingTransition(0, 0);
         startActivity(intent);
     }
+
+    /**
+     * 获取当前layouty的布局ID,用于设置当前布局
+     * <p>
+     * 交由子类实现
+     *
+     * @return layout Id
+     */
+    protected abstract int getLayoutId();
 
     /**
      * 初始化数据
@@ -114,15 +125,6 @@ public abstract class BaseCompatActivity extends SupportActivity {
      * @param savedInstanceState savedInstanceState
      */
     protected abstract void initView(Bundle savedInstanceState);
-
-    /**
-     * 获取当前layouty的布局ID,用于设置当前布局
-     * <p>
-     * 交由子类实现
-     *
-     * @return layout Id
-     */
-    protected abstract int getLayoutId();
 
     /**
      * 显示提示框
@@ -151,8 +153,7 @@ public abstract class BaseCompatActivity extends SupportActivity {
     public void startActivity(Class<?> clz) {
         startActivity(new Intent(this, clz));
         if (isTransAnim)
-            overridePendingTransition(R.anim.activity_start_zoom_in, R.anim
-                    .activity_start_zoom_out);
+            overridePendingTransition(R.anim.activity_start_zoom_in, R.anim.activity_start_zoom_out);
     }
 
     /**
@@ -165,8 +166,7 @@ public abstract class BaseCompatActivity extends SupportActivity {
         intent.setClass(this, clz);
         startActivity(intent);
         if (isTransAnim)
-            overridePendingTransition(R.anim.activity_start_zoom_in, R.anim
-                    .activity_start_zoom_out);
+            overridePendingTransition(R.anim.activity_start_zoom_in, R.anim.activity_start_zoom_out);
     }
 
     /**
@@ -183,8 +183,7 @@ public abstract class BaseCompatActivity extends SupportActivity {
         }
         startActivity(intent);
         if (isTransAnim)
-            overridePendingTransition(R.anim.activity_start_zoom_in, R.anim
-                    .activity_start_zoom_out);
+            overridePendingTransition(R.anim.activity_start_zoom_in, R.anim.activity_start_zoom_out);
     }
 
     /**
@@ -194,8 +193,7 @@ public abstract class BaseCompatActivity extends SupportActivity {
      * @param bundle      bundel数据
      * @param requestCode requestCode
      */
-    public void startActivityForResult(Class<?> clz, Bundle bundle,
-                                       int requestCode) {
+    public void startActivityForResult(Class<?> clz, Bundle bundle, int requestCode) {
         Intent intent = new Intent();
         intent.setClass(this, clz);
         if (bundle != null) {
@@ -203,16 +201,14 @@ public abstract class BaseCompatActivity extends SupportActivity {
         }
         startActivityForResult(intent, requestCode);
         if (isTransAnim)
-            overridePendingTransition(R.anim.activity_start_zoom_in, R.anim
-                    .activity_start_zoom_out);
+            overridePendingTransition(R.anim.activity_start_zoom_in, R.anim.activity_start_zoom_out);
     }
 
     @Override
     public void finish() {
         super.finish();
         if (isTransAnim)
-            overridePendingTransition(R.anim.activity_finish_trans_in, R.anim
-                    .activity_finish_trans_out);
+            overridePendingTransition(R.anim.activity_finish_trans_in, R.anim.activity_finish_trans_out);
     }
 
     /**
@@ -226,10 +222,8 @@ public abstract class BaseCompatActivity extends SupportActivity {
      */
     protected boolean hiddenKeyboard() {
         //点击空白位置 隐藏软键盘
-        InputMethodManager mInputMethodManager = (InputMethodManager) getSystemService
-                (INPUT_METHOD_SERVICE);
-        return mInputMethodManager.hideSoftInputFromWindow(this
-                .getCurrentFocus().getWindowToken(), 0);
+        InputMethodManager mInputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        return mInputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
     }
 
     protected void initTitleBar(Toolbar toolbar, String title) {

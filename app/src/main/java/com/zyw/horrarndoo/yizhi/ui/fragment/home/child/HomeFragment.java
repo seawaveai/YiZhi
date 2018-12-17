@@ -103,6 +103,8 @@ public class HomeFragment extends BaseMVPCompatFragment<HomeMainContract.HomeMai
                 }
             }
         });
+
+        //监听AppBarLayout,控制FloatingActionButton显示和隐藏
         appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
@@ -113,6 +115,8 @@ public class HomeFragment extends BaseMVPCompatFragment<HomeMainContract.HomeMai
                 }
             }
         });
+
+        //点击FloatingActionButton进行跳转
         fabDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

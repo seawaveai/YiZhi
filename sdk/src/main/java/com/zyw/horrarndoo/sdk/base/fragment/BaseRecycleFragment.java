@@ -37,8 +37,7 @@ public abstract class BaseRecycleFragment<P extends BasePresenter> extends
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
-            Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         errorView = inflater.inflate(R.layout.view_network_error, container, false);
         loadingView = inflater.inflate(R.layout.view_loading, container, false);
         emptyView = inflater.inflate(R.layout.view_empty, container, false);

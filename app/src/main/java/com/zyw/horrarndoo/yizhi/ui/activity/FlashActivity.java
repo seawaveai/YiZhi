@@ -136,7 +136,7 @@ public class FlashActivity extends BaseCompatActivity {
 
                     @Override
                     public void onNext(Long value) {
-                        //                        Logger.e("value = " + value);
+                        //Logger.e("value = " + value);
                         String s = String.valueOf(value);
                         if (tvCountDown != null)
                             tvCountDown.setText(StringUtils.isEmpty(s) ? "" : s);

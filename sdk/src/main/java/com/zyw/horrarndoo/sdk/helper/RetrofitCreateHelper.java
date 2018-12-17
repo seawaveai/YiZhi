@@ -16,6 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by Horrarndoo on 2017/9/7.
  * <p>
+ *     Retrofit+okhttp3+Rxjava 抽取网络请求
  */
 
 public class RetrofitCreateHelper {
@@ -24,6 +25,7 @@ public class RetrofitCreateHelper {
     private static final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY);
     private static CacheInterceptor cacheInterceptor = new CacheInterceptor();
+    //New OkHttpClient
     private static OkHttpClient okHttpClient = new OkHttpClient.Builder()
             //SSL证书
             .sslSocketFactory(TrustManager.getUnsafeOkHttpClient())
@@ -42,11 +44,12 @@ public class RetrofitCreateHelper {
             .retryOnConnectionFailure(true)
             .build();
 
+    //网络请求
     public static <T> T createApi(Class<T> clazz, String url) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .client(okHttpClient)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//RxJava
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit.create(clazz);

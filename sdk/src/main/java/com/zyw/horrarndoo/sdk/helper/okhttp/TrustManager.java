@@ -18,14 +18,12 @@ public class TrustManager {
             // Create a trust manager that does not validate certificate chains
             final X509TrustManager[] trustAllCerts = new X509TrustManager[]{new X509TrustManager() {
                 @Override
-                public void checkClientTrusted(
-                        X509Certificate[] chain,
+                public void checkClientTrusted(X509Certificate[] chain,
                         String authType) throws CertificateException {
                 }
 
                 @Override
-                public void checkServerTrusted(
-                        X509Certificate[] chain,
+                public void checkServerTrusted(X509Certificate[] chain,
                         String authType) throws CertificateException {
                 }
 
@@ -37,13 +35,9 @@ public class TrustManager {
 
             // Install the all-trusting trust manager
             final SSLContext sslContext = SSLContext.getInstance("TLS");
-            sslContext.init(null, trustAllCerts,
-                    new java.security.SecureRandom());
+            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
             // Create an ssl socket factory with our all-trusting manager
-            final SSLSocketFactory sslSocketFactory = sslContext
-                    .getSocketFactory();
-
-
+            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
             return sslSocketFactory;
         } catch (Exception e) {
             throw new RuntimeException(e);
