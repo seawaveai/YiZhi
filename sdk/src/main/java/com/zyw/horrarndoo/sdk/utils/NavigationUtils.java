@@ -10,11 +10,11 @@ import android.support.design.widget.NavigationView;
  */
 
 public class NavigationUtils {
-
+    //去掉scrollbar。scrollbar在NavigationView的child:NavigationMenuView中，
+    //navigationView.getChildAt(0).setVerticalScrollBarEnabled(false);
     public static void disableNavigationViewScrollbars(NavigationView navigationView) {
         if (navigationView != null) {
-            NavigationMenuView navigationMenuView = (NavigationMenuView) navigationView
-                    .getChildAt(0);
+            NavigationMenuView navigationMenuView = (NavigationMenuView) navigationView.getChildAt(0);
             if (navigationMenuView != null) {
                 navigationMenuView.setVerticalScrollBarEnabled(false);
             }

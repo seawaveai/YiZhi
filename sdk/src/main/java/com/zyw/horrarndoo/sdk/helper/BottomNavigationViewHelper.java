@@ -13,6 +13,7 @@ import java.lang.reflect.Field;
  * BottomNavigationView禁止3个item以上动画切换效果
  */
 public class BottomNavigationViewHelper {
+
     public static void disableShiftMode(BottomNavigationView view) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
         try {
@@ -34,4 +35,5 @@ public class BottomNavigationViewHelper {
             Log.e("BNVHelper", "Unable to change value of shift mode", e);
         }
     }
+
 }

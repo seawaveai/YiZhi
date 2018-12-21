@@ -50,8 +50,7 @@ import static com.zyw.horrarndoo.yizhi.constant.RxBusCode.RX_BUS_CODE_HEAD_IMAGE
  * 主页activity
  */
 
-public class MainActivity extends BaseCompatActivity implements HomeFragment
-        .OnOpenDrawerLayoutListener {
+public class MainActivity extends BaseCompatActivity implements HomeFragment.OnOpenDrawerLayoutListener {
 
     @BindView(R.id.nv_menu)
     NavigationView nvMenu;
@@ -77,37 +76,37 @@ public class MainActivity extends BaseCompatActivity implements HomeFragment
     @Override
     protected void initData() {
         super.initData();
-        //        Logger.e("RxBus.get().register(this)");
+        //Logger.e("RxBus.get().register(this)");
         RxBus.get().register(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //        Logger.e("RxBus.get().unRegister(this)");
+        //Logger.e("RxBus.get().unRegister(this)");
         RxBus.get().unRegister(this);
     }
 
     @Override
     protected void initView(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-            mFragments[FIRST] = HomeRootFragment.newInstance();
-            mFragments[SECOND] = GankIoRootFragment.newInstance();
-            mFragments[THIRD] = MovieRootFragment.newInstance();
-            mFragments[FOURTH] = BookRootFragment.newInstance();
-            mFragments[FIFTH] = PersonalRootFragment.newInstance();
+            mFragments[FIRST] = HomeRootFragment.newInstance(); //主页
+            mFragments[SECOND] = GankIoRootFragment.newInstance();//干货
+            mFragments[THIRD] = MovieRootFragment.newInstance();//影视
+            mFragments[FOURTH] = BookRootFragment.newInstance();//书籍
+            mFragments[FIFTH] = PersonalRootFragment.newInstance();//个人
 
             loadMultipleRootFragment(R.id.fl_container, FIRST,
                     mFragments[FIRST],
                     mFragments[SECOND],
                     mFragments[THIRD],
                     mFragments[FOURTH],
-                    mFragments[FIFTH]);
+                    mFragments[FIFTH]);//库里的方法
         } else {
             // 这里库已经做了Fragment恢复,所有不需要额外的处理了, 不会出现重叠问题
             // 这里我们需要拿到mFragments的引用,也可以通过getSupportFragmentManager.getFragments()
             // 自行进行判断查找(效率更高些),用下面的方法查找更方便些
-            mFragments[FIRST] = findFragment(HomeRootFragment.class);
+            mFragments[FIRST] = findFragment(HomeRootFragment.class);//库里的方法
             mFragments[SECOND] = findFragment(GankIoRootFragment.class);
             mFragments[THIRD] = findFragment(MovieRootFragment.class);
             mFragments[FOURTH] = findFragment(BookRootFragment.class);
@@ -132,6 +131,7 @@ public class MainActivity extends BaseCompatActivity implements HomeFragment
         civHead.setOnClickListener(new View.OnClickListener() {//点击侧滑的头像,跳转到页面(这里是personal_fragment)
             @Override
             public void onClick(View v) {
+                //隐藏侧滑界面 和 跳转到personal_Fragment
                 dlRoot.closeDrawer(GravityCompat.START);
                 bottomNavigationView.setSelectedItemId(R.id.menu_item_personal);
             }

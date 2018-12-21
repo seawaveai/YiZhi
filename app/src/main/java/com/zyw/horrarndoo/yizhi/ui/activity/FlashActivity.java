@@ -121,7 +121,7 @@ public class FlashActivity extends BaseCompatActivity {
 
     private void initCountDown() {
         Observable.interval(1, TimeUnit.SECONDS)
-                .take(3)//计时次数
+                .take(3)//计时次数 (取前面的N次)
                 .map(new Function<Long, Long>() {
                     @Override
                     public Long apply(Long aLong) throws Exception {
