@@ -1,6 +1,7 @@
 package com.zyw.horrarndoo.yizhi.ui.fragment.home.child;
 
 import android.content.Context;
+import android.content.SyncStatusObserver;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

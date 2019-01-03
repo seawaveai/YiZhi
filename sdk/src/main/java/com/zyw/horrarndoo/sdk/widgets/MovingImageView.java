@@ -22,18 +22,19 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 import com.zyw.horrarndoo.sdk.R;
-
 
 /**
  * Created by Horrarndoo on 2017/9/7.
  * <p>
  * 自定义可以背景滚动的ImageView
+ * <p>
+ * 继承ImageView报错，改成AppCompatImageView。
  */
-public class MovingImageView extends ImageView {
+public class MovingImageView extends AppCompatImageView {
 
     private float canvasWidth, canvasHeight;
     private float imageWidth, imageHeight;
@@ -47,14 +48,14 @@ public class MovingImageView extends ImageView {
      * 限定最大比值
      * canvasHeight/drawableHeight 或者 canvasWidth/drawableWidth
      */
-    private float maxRelativeSize;
+    private float   maxRelativeSize;
     /**
      * 最小相对偏移值，图片最起码可以位移图*0.2的距离
      */
-    private float minRelativeOffset;
-    private int mSpeed;
-    private long startDelay;
-    private int mRepetitions;
+    private float   minRelativeOffset;
+    private int     mSpeed;
+    private long    startDelay;
+    private int     mRepetitions;
     private boolean loadOnCreate;//load完毕后是否移动
 
     private MovingViewAnimator mAnimator;
@@ -70,13 +71,11 @@ public class MovingImageView extends ImageView {
     public MovingImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        TypedArray ta = context.getTheme().obtainStyledAttributes(attrs,
-                R.styleable.MovingImageView, defStyle, 0);
+        TypedArray ta = context.getTheme().obtainStyledAttributes(attrs, R.styleable.MovingImageView, defStyle, 0);
 
         try {
             maxRelativeSize = ta.getFloat(R.styleable.MovingImageView_miv_max_relative_size, 3.0f);
-            minRelativeOffset = ta.getFloat(R.styleable.MovingImageView_miv_min_relative_offset,
-                    0.2f);
+            minRelativeOffset = ta.getFloat(R.styleable.MovingImageView_miv_min_relative_offset, 0.2f);
             mSpeed = ta.getInt(R.styleable.MovingImageView_miv_speed, 50);
             mRepetitions = ta.getInt(R.styleable.MovingImageView_miv_repetitions, -1);
             startDelay = ta.getInt(R.styleable.MovingImageView_miv_start_delay, 0);
@@ -189,8 +188,7 @@ public class MovingImageView extends ImageView {
 
             } else {
                 scale = Math.max(sW, maxRelativeSize);//限定最大缩放值
-                movementType = (scale == sW) ? MovingViewAnimator.NONE_MOVE :
-                        MovingViewAnimator.DIAGONAL_MOVE;//对角线移动
+                movementType = (scale == sW) ? MovingViewAnimator.NONE_MOVE : MovingViewAnimator.DIAGONAL_MOVE;//对角线移动
             }
         } else if (offsetWidth == 0) {//宽度太小，无法执行水平动画，放大宽度
             scale = canvasWidth / imageWidth;
@@ -329,4 +327,5 @@ public class MovingImageView extends ImageView {
     public MovingViewAnimator.MovingState getMovingState() {
         return mAnimator.getMovingState();
     }
+
 }

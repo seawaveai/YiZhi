@@ -164,11 +164,10 @@ public class MainActivity extends BaseCompatActivity implements HomeFragment.OnO
             }
         });
 
-        //根据模式来展示侧滑界面
-        nvMenu.getMenu().findItem(R.id.item_model).setTitle(SpUtils.getNightModel(mContext) ?
-                "夜间模式" : "日间模式");
-        nvMenu.setNavigationItemSelectedListener(new NavigationView
-                .OnNavigationItemSelectedListener() {
+        //根据模式来展示侧滑界面?
+        nvMenu.getMenu().findItem(R.id.item_model).setTitle(SpUtils.getNightModel(mContext) ? "夜间模式" : "日间模式");
+        //侧滑界面点击的监听
+        nvMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
@@ -181,10 +180,8 @@ public class MainActivity extends BaseCompatActivity implements HomeFragment.OnO
                         break;
                     case R.id.group_item_more://更多内容
                         Bundle bundle2 = new Bundle();
-                        bundle2.putString(BundleKeyConstant.ARG_KEY_WEB_VIEW_LOAD_TITLE,
-                                "Horrarndoo");
-                        bundle2.putString(BundleKeyConstant.ARG_KEY_WEB_VIEW_LOAD_URL,
-                                "http://blog.csdn.net/oqinyou");
+                        bundle2.putString(BundleKeyConstant.ARG_KEY_WEB_VIEW_LOAD_TITLE, "Horrarndoo");
+                        bundle2.putString(BundleKeyConstant.ARG_KEY_WEB_VIEW_LOAD_URL, "http://blog.csdn.net/oqinyou");
                         startActivity(WebViewLoadActivity.class, bundle2);
                         break;
                     case R.id.group_item_qr_code://二维码
@@ -201,7 +198,7 @@ public class MainActivity extends BaseCompatActivity implements HomeFragment.OnO
                         startActivity(AboutActivity.class);
                         break;
                 }
-
+                //item选中后，要取消并关闭侧滑菜单
                 item.setCheckable(false);
                 dlRoot.closeDrawer(GravityCompat.START);
                 return true;

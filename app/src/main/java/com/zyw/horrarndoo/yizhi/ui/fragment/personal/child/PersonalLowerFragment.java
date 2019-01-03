@@ -46,7 +46,7 @@ public class PersonalLowerFragment extends BaseCompatFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_btn_settings:
-                start(PersonalSettingFragment.newInstance());
+                start(PersonalSettingFragment.newInstance());//点击设置，会展示PersonalSettingFragment
                 break;
             case R.id.tv_btn_about:
                 startActivity(new Intent(mActivity, AboutActivity.class));
